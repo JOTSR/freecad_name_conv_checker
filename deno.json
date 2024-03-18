@@ -1,0 +1,14 @@
+{
+	"name": "@jotsr/fcnc",
+	"version": "0.1.0",
+	"fmt": {
+		"useTabs": true,
+		"semiColons": false,
+		"singleQuote": true
+	},
+	"imports": {
+		"@cliffy/": "https://deno.land/x/cliffy/",
+		"@std/fs": "jsr:@std/fs@^0.220.1",
+		"@std/path": "jsr:@std/path@^0.220.1"
+	}
+}
