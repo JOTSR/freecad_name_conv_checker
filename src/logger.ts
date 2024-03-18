@@ -1,19 +1,60 @@
 import { Constraint } from '../types.ts'
 
-export function logCheckConstraint(constraint: Constraint, isValid: boolean) {
+export function logCheckConstraint(
+	constraint: Constraint,
+	isValid: boolean,
+	{ logger }: { logger: Logger },
+) {
 	if (isValid) {
+		logger.info('valid', { value: constraint.kind, style: 'label' })
+	} else {
+		logger.info('invalid', { value: constraint.kind, style: 'label' })
+	}
+}
+
+export class Logger {
+	#logLevel = 1
+
+	constructor(logLevel: number) {
+		this.#logLevel = logLevel
+	}
+
+	log(msg: string, options: { value: string; style: 'path' | 'label' }) {
+		if (this.#logLevel < 2) return
+
+		console.log(
+			`%c[utils:freecad]%c: ${msg} %c${options.value}`,
+			'color: royalblue; font-weight: bold',
+			'',
+			options.style === 'path'
+				? 'text-decoration: underline'
+				: 'color: goldenrod',
+		)
+	}
+
+	info(msg: string, options: { value: string; style: 'path' | 'label' }) {
+		if (this.#logLevel < 3) return
+
 		console.info(
-			`%c[utils:freecad]%c: valid %c${constraint.kind}`,
+			`%c[utils:freecad]%c: ${msg} %c${options.value}`,
 			'color: green; font-weight: bold',
 			'',
-			'color: goldenrod',
+			options.style === 'path'
+				? 'text-decoration: underline'
+				: 'color: goldenrod',
 		)
-	} else {
+	}
+
+	error(msg: string, options: { value: string; style: 'path' | 'label' }) {
+		if (this.#logLevel < 1) return
+
 		console.error(
-			`%c[utils:freecad]%c: invalid %c${constraint.kind}`,
+			`%c[utils:freecad]%c: ${msg} %c${options.value}`,
 			'color: red; font-weight: bold',
 			'',
-			'color: goldenrod',
+			options.style === 'path'
+				? 'text-decoration: underline'
+				: 'color: goldenrod',
 		)
 	}
 }

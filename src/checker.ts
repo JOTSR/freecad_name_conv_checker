@@ -1,6 +1,7 @@
 import { relative } from '@std/path'
 import { Constraint } from '../types.ts'
 import { logCheckConstraint } from './logger.ts'
+import { Logger } from './logger.ts'
 
 function checkConstraint(value: string, constraint: Constraint): boolean {
 	const fields = constraint.pattern.match(/\$\w+/g) ?? []
@@ -43,9 +44,10 @@ function checkConstraint(value: string, constraint: Constraint): boolean {
 export function checkConstraints(
 	fcinfo: string,
 	constraints: Constraint[],
-	{ basePath = Deno.cwd(), filePath }: {
+	{ basePath = Deno.cwd(), filePath, logger }: {
 		basePath?: string
 		filePath: string
+		logger: Logger
 	},
 ): boolean {
 	for (const constraint of constraints) {
@@ -54,7 +56,7 @@ export function checkConstraints(
 				relative(basePath, filePath).replaceAll('\\', '/'),
 				constraint,
 			)
-			logCheckConstraint(constraint, isValid)
+			logCheckConstraint(constraint, isValid, { logger })
 			if (!isValid) return false
 			continue
 		}
@@ -62,7 +64,7 @@ export function checkConstraints(
 		if (constraint.kind === 'file:label') {
 			const match = fcinfo.match(/\s*Label : (.*)/)
 			const isValid = checkConstraint(match?.at(1) ?? '', constraint)
-			logCheckConstraint(constraint, isValid)
+			logCheckConstraint(constraint, isValid, { logger })
 			if (!isValid) return false
 			continue
 		}
@@ -72,7 +74,7 @@ export function checkConstraints(
 			const isValid = matches.slice(1).every((match) =>
 				checkConstraint(match[1], constraint)
 			)
-			logCheckConstraint(constraint, isValid)
+			logCheckConstraint(constraint, isValid, { logger })
 			if (!isValid) return false
 		}
 	}
