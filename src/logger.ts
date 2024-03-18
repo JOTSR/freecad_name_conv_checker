@@ -1,3 +1,4 @@
+import config from '../deno.json' with { type: 'json' }
 import { Constraint } from '../types.ts'
 
 export function logCheckConstraint(
@@ -14,6 +15,7 @@ export function logCheckConstraint(
 
 export class Logger {
 	#logLevel = 1
+	#logName = config.name.split('/')[1]
 
 	constructor(logLevel: number) {
 		this.#logLevel = logLevel
@@ -23,7 +25,7 @@ export class Logger {
 		if (this.#logLevel < 2) return
 
 		console.log(
-			`%c[utils:freecad]%c: ${msg} %c${options.value}`,
+			`%c[${this.#logName}]%c: ${msg} %c${options.value}`,
 			'color: royalblue; font-weight: bold',
 			'',
 			options.style === 'path'
@@ -36,7 +38,7 @@ export class Logger {
 		if (this.#logLevel < 3) return
 
 		console.info(
-			`%c[utils:freecad]%c: ${msg} %c${options.value}`,
+			`%c[${this.#logName}]%c: ${msg} %c${options.value}`,
 			'color: green; font-weight: bold',
 			'',
 			options.style === 'path'
@@ -49,7 +51,7 @@ export class Logger {
 		if (this.#logLevel < 1) return
 
 		console.error(
-			`%c[utils:freecad]%c: ${msg} %c${options.value}`,
+			`%c[${this.#logName}]%c: ${msg} %c${options.value}`,
 			'color: red; font-weight: bold',
 			'',
 			options.style === 'path'
