@@ -7,7 +7,7 @@
 		"singleQuote": true
 	},
 	"imports": {
-		"@cliffy/": "https://deno.land/x/cliffy/",
+		"@cliffy/": "https://deno.land/x/cliffy@v1.0.0-rc.3/",
 		"@std/fs": "jsr:@std/fs@^0.220.1",
 		"@std/path": "jsr:@std/path@^0.220.1"
 	}
