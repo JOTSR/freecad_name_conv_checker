@@ -4,7 +4,9 @@ import { logCheckConstraint } from './logger.ts'
 
 function checkConstraint(value: string, constraint: Constraint): boolean {
 	const fields = constraint.pattern.match(/\$\w+/g) ?? []
-	const regexp = fields.map((format) => constraint.fields[format.slice(1)])
+	const regexp = constraint.fields !== undefined
+		? fields.map((format) => constraint.fields![format.slice(1)])
+		: []
 	const matcher = constraint.pattern.split(
 		new RegExp(fields.join('|').replaceAll('$', '\\$')),
 	)

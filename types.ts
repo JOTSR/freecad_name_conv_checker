@@ -1,7 +1,7 @@
 export type Constraint = {
 	kind: 'file:path' | 'file:label' | 'object:label'
 	pattern: string
-	fields: {
+	fields?: {
 		[name: string]: RegExp[]
 	}
 }
