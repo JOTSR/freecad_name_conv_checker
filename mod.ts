@@ -5,6 +5,10 @@ import config from './deno.json' with { type: 'json' }
 import { checkConstraints } from './src/checker.ts'
 import { Logger } from './src/logger.ts'
 
+export { checkConstraint } from './src/checker.ts'
+export type { Constraint } from './types.ts'
+export { checkConstraints }
+
 if (import.meta.main) {
 	const verbosity = new EnumType([1, 2])
 

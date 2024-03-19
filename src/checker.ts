@@ -3,7 +3,7 @@ import { Constraint } from '../types.ts'
 import { logCheckConstraint } from './logger.ts'
 import { Logger } from './logger.ts'
 
-function checkConstraint(value: string, constraint: Constraint): boolean {
+export function checkConstraint(value: string, constraint: Constraint): boolean {
 	const fields = constraint.pattern.match(/\$\w+/g) ?? []
 	const regexp = constraint.fields !== undefined
 		? fields.map((format) => constraint.fields![format.slice(1)])
