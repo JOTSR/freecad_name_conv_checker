@@ -15,7 +15,8 @@
 		"compile:windows": "deno compile -o=dist/fcnc-x86_64-pc-windows-msvc.exe --target=x86_64-pc-windows-msvc --allow-read ./mod.ts"
 	},
 	"imports": {
-		"@cliffy/": "https://deno.land/x/cliffy@v1.0.0-rc.3/",
+		"https://deno.land/": "./vendor/deno.land/",
+		"@cliffy/": "./vendor/deno.land/x/cliffy@v1.0.0-rc.3/",
 		"@std/fs": "jsr:@std/fs@^0.220.1",
 		"@std/path": "jsr:@std/path@^0.220.1"
 	},
@@ -27,5 +28,6 @@
 		"useTabs": true,
 		"semiColons": false,
 		"singleQuote": true
-	}
+	},
+	"exclude": ["./vendor"]
 }
