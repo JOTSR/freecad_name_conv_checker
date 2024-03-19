@@ -4,7 +4,7 @@
 	"version": "0.1.1",
 	"tasks": {
 		"hooks:install": "deno run --allow-read=. --allow-write=./.git/hooks https://deno.land/x/denoh@v3.2.0/denoh.ts",
-		"fmt:check": "git diff --name-only --staged | xargs deno fmt --check deno.json",
+		"fmt:check": "git diff --name-only --staged | xargs deno fmt --ignore=vendor --check deno.json",
 		"compile": "deno task compile:linux ; deno task compile:macos ; deno task compile:windows",
 		"compile:linux": "deno task compile:linux:x86 ; deno task compile:linux:arm64",
 		"compile:linux:x86": "deno compile -o=dist/fcnc-x86_64-unknown-linux-gnu --target=x86_64-unknown-linux-gnu --allow-read ./mod.ts",
@@ -29,9 +29,7 @@
 		"semiColons": false,
 		"singleQuote": true
 	},
-	"exclude": ["./vendor"],
 	"publish": {
-		"exclude": ["./dist"],
-		"include": ["./vendor"]
+		"exclude": ["./dist"]
 	}
 }
