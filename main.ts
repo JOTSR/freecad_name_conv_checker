@@ -16,7 +16,7 @@ if (import.meta.main) {
 			conflicts: ['silent'],
 		})
 		.option('-s, --silent', 'Disable any output.', { conflicts: ['verbose'] })
-		.option('-b, --base <path:file>', 'Base path for file:path constraint.', {
+		.option('-b, --base <path:file>', 'Base path for "file:path" constraint.', {
 			default: Deno.cwd(),
 		})
 		.arguments('<constraints:file> <...files:file>')
