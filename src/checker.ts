@@ -2,6 +2,31 @@ import { relative } from '@std/path'
 import { Constraint } from '../types.ts'
 import { logCheckConstraint, Logger } from './logger.ts'
 
+/**
+ * Check a fcinfo file value against a constraint model.
+ *
+ * @param {string} value Token to check against name convention.
+ * @param {Constraint} constraint Constraint model to use for checking.
+ * @returns {boolean} Validity of value for given name convention constraint.
+ *
+ * @example
+ * ```ts
+ * const snakeCaseLabel = /[a-z][a-z0-9_]*[a-z0-9]/
+ *
+ * const filePathConstraint: Constraint = {
+ * 	kind: 'file:path',
+ * 	pattern: '$dir.$name.fcinfo',
+ * 	fields: {
+ * 		dir: [/.+/],
+ * 		name: [snakeCaseLabel],
+ * 	},
+ * }
+ *
+ * const filePath = 'sketch/box.fcinfo'
+ *
+ * console.assert(checkConstraint(filePath, filePathConstraint))
+ * ```
+ */
 export function checkConstraint(
 	value: string,
 	constraint: Constraint,
@@ -43,6 +68,58 @@ export function checkConstraint(
 	return value.length === 0
 }
 
+/**
+ * Check a fcinfo file against a list of constraints.
+ *
+ * @param {string} fcinfo FreeCAD model info to check.
+ * @param {Constraint[]} constraints List of constraints to apply on naming.
+ * @param {object} options Base path for checking "file:path". `fcinfo` file path for checking "file:path". Logger to use.
+ * @returns {boolean} Validity of the fcinfo file against constraints list.
+ *
+ * @example
+ * ```ts
+ * //name_conv.ts
+ * const snakeCaseLabel = /[a-z][a-z0-9_]*[a-z0-9]/
+ * const filePath: Constraint = {
+ * 	kind: 'file:path',
+ * 	pattern: '$function/$name.$type.fcinfo',
+ * 	fields: {
+ * 		function: [/structure/, /caterpillar/, /case/, /placeholder/],
+ * 		name: [snakeCaseLabel],
+ * 		type: [/part/, /assembly/],
+ * 	},
+ * }
+ *
+ * const fileLabel: Constraint = {
+ * 	kind: 'file:label',
+ * 	pattern: '$label.$type',
+ * 	fields: {
+ * 		label: [snakeCaseLabel],
+ * 		type: [/part/, /assembly/],
+ * 	},
+ * }
+ *
+ * const objectLabel: Constraint = {
+ * 	kind: 'object:label',
+ * 	pattern: '$label',
+ * 	fields: {
+ * 		label: [snakeCaseLabel],
+ * 	},
+ * }
+ *
+ * export default [filePath, fileLabel, objectLabel]
+ *
+ * //checker.ts
+ * const fcinfo = await Deno.readTextFile('./file.fcinfo')
+ * const { default: constraints } = await import('./name_conv.ts')
+ *
+ * checkConstraints(fcinfo, constraints, {
+ * 	basePath: './sketchs/',
+ * 	filePath: './file.fcinfo',
+ * 	logger: new Logger(1),
+ * })
+ * ```
+ */
 export function checkConstraints(
 	fcinfo: string,
 	constraints: Constraint[],
