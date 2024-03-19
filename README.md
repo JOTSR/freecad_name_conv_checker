@@ -6,8 +6,9 @@
 
 [![JSR](https://jsr.io/badges/@jotsr/fcnc?style=flat-square)](https://jsr.io/@jotsr/fcnc)
 [![JSR](https://jsr.io/badges/@jotsr/fcnc/score?style=flat-square)](https://jsr.io/@jotsr/fcnc)
-![GitHub License](https://img.shields.io/github/license/JOTSR/fcnc?style=flat-square)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/JOTSR/fcnc/total?style=flat-square)
+![GitHub License](https://img.shields.io/github/license/JOTSR/freecad_name_conv_checker?style=flat-square)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/JOTSR/freecad_name_conv_checker/total?style=flat-square)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/JOTSR/freecad_name_conv_checker/publish.yml?style=flat-square)
 
 `fcnc` tool allows you to check your custom name convention of your
 [FreeCAD](https://www.freecad.org/) models (based on
