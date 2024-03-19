@@ -2,28 +2,34 @@ import { walk } from '@std/fs'
 import { join, toFileUrl } from '@std/path'
 import { checkConstraints } from './src/checker.ts'
 import { Logger } from './src/logger.ts'
-import { Command } from '@cliffy/command/mod.ts'
+import { Command, EnumType } from '@cliffy/command/mod.ts'
 import config from './deno.json' with { type: 'json' }
 
 if (import.meta.main) {
+	const verbosity = new EnumType([1, 2])
+
 	const cmd = new Command()
 		.name(config.name.split('/')[1])
 		.version(config.version)
-		.option('-v, --verbose', 'Enable verbose output.')
-		.option('-vv, --very-verbose', 'Enable very verbose output.')
-		.option('-s, --silent', 'Disable any output.')
+		.type('level', verbosity)
+		.option('-v, --verbose [value:level]', 'Enable verbose output.', {
+			conflicts: ['silent'],
+		})
+		.option('-s, --silent', 'Disable any output.', { conflicts: ['verbose'] })
 		.option('-b, --base <path:file>', 'Base path for file:path constraint.', {
 			default: Deno.cwd(),
 		})
-		.arguments('<constraints:file>')
-		.action(async ({ verbose, veryVerbose, silent, base }, constraintFile) => {
+		.arguments('<constraints:file> <files:string[]>')
+		.action(async ({ verbose, silent, base }, constraintFile, files) => {
 			const { default: constraints } = await import(
 				toFileUrl(join(Deno.cwd(), constraintFile)).href
 			)
 
 			let exitCode = 0
 
-			const logger = new Logger(silent ? 0 : veryVerbose ? 3 : verbose ? 2 : 1)
+			const logger = new Logger(
+				(silent ? 0 : verbose === true ? 1 : verbose) ?? 1,
+			)
 
 			for await (
 				const file of walk(base, {
