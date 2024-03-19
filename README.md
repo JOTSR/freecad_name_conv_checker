@@ -8,7 +8,18 @@
 ![GitHub License](https://img.shields.io/github/license/JOTSR/fcnc?style=flat-square)
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/JOTSR/fcnc/total?style=flat-square)
 
+`fcnc` tool allows you to check your custom name convention of your
+[FreeCAD](https://www.freecad.org/) models (based on
+[fcinfo](https://github.com/FreeCAD/FreeCAD/blob/main/src/Tools/fcinfo) output).
+
 ## Basic usage
+
+### Requirements
+
+- [fcinfo](https://github.com/FreeCAD/FreeCAD/blob/main/src/Tools/fcinfo) for
+  extracting informations from `FreeCAD` files.
+- [python3](https://www.python.org/downloads/) for running `fcinfo`.
+- [deno](https://deno.land) only for contributing or for installation-less use.
 
 ### CLI
 
@@ -19,6 +30,10 @@
 
 - Check constraints:
   ```sh
+  # Run fcinfo
+  ./fcinfo my_freecad_model.FCStd > any_file.fcinfo
+
+  # Check name convention
   fcnc my_constraints.ts any_file.fcinfo or*globs?.fcinfo
   ```
 
@@ -47,6 +62,8 @@ const fileLabel: Constraint = {
 //name convention file should export array of constraints as default export
 export default [fileLabel]
 ```
+
+### [Documentation](#doc)
 
 ## Installation
 
