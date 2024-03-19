@@ -4,8 +4,6 @@ import { globToRegExp, join, toFileUrl } from '@std/path'
 import config from './deno.json' with { type: 'json' }
 import { checkConstraints } from './src/checker.ts'
 import { Logger } from './src/logger.ts'
-import { Command, EnumType } from '@cliffy/command/mod.ts'
-import config from './deno.json' with { type: 'json' }
 
 if (import.meta.main) {
 	const verbosity = new EnumType([1, 2])
@@ -21,49 +19,52 @@ if (import.meta.main) {
 		.option('-b, --base <path:file>', 'Base path for "file:path" constraint.', {
 			default: Deno.cwd(),
 		})
+		.option('-p, --bypass', 'Disable non 0 exit code on check failure.')
 		.arguments('<constraints:file> <...files:file>')
-		.action(async ({ verbose, silent, base }, constraintFile, ...files) => {
-			const { default: constraints } = await import(
-				toFileUrl(join(Deno.cwd(), constraintFile)).href
-			)
+		.action(
+			async ({ verbose, silent, base, bypass }, constraintFile, ...files) => {
+				const { default: constraints } = await import(
+					toFileUrl(join(Deno.cwd(), constraintFile)).href
+				)
 
-			let exitCode = 0
+				let exitCode = 0
 
-			const logger = new Logger(
-				(silent ? 0 : verbose === true ? 1 : verbose) ?? 1,
-			)
+				const logger = new Logger(
+					(silent ? 0 : verbose === true ? 1 : verbose) ?? 1,
+				)
 
-			for await (
-				const file of walk(base, {
-					match: files.map((file) => globToRegExp(file)),
-					includeDirs: false,
-				})
-			) {
-				logger.log('checking name convention for', {
-					value: file.path,
-					style: 'path',
-				})
-				const fcinfo = await Deno.readTextFile(file.path)
-				const isValid = checkConstraints(fcinfo, constraints, {
-					basePath: base,
-					filePath: file.path,
-					logger,
-				})
-				if (!isValid) {
-					logger.error('error in name convention for', {
+				for await (
+					const file of walk(base, {
+						match: files.map((file) => globToRegExp(file)),
+						includeDirs: false,
+					})
+				) {
+					logger.log('checking name convention for', {
 						value: file.path,
 						style: 'path',
 					})
-					exitCode = 1
-				} else {
-					logger.info('valid name convention for', {
-						value: file.path,
-						style: 'path',
+					const fcinfo = await Deno.readTextFile(file.path)
+					const isValid = checkConstraints(fcinfo, constraints, {
+						basePath: base,
+						filePath: file.path,
+						logger,
 					})
+					if (!isValid) {
+						logger.error('error in name convention for', {
+							value: file.path,
+							style: 'path',
+						})
+						exitCode = 1
+					} else {
+						logger.info('valid name convention for', {
+							value: file.path,
+							style: 'path',
+						})
+					}
 				}
-			}
-			Deno.exit(exitCode)
-		})
+				Deno.exit(bypass ? 0 : exitCode)
+			},
+		)
 
 	if (Deno.args.length) {
 		await cmd.parse(Deno.args)
