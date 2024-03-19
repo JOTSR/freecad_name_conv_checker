@@ -20,9 +20,14 @@ if (import.meta.main) {
 			default: Deno.cwd(),
 		})
 		.option('-p, --bypass', 'Disable non 0 exit code on check failure.')
+		.option('-f, --fail-fast', 'Stop checking on first error.')
 		.arguments('<constraints:file> <...files:file>')
 		.action(
-			async ({ verbose, silent, base, bypass }, constraintFile, ...files) => {
+			async (
+				{ verbose, silent, base, bypass, failFast },
+				constraintFile,
+				...files
+			) => {
 				const { default: constraints } = await import(
 					toFileUrl(join(Deno.cwd(), constraintFile)).href
 				)
@@ -55,6 +60,7 @@ if (import.meta.main) {
 							style: 'path',
 						})
 						exitCode = 1
+						if (failFast) break
 					} else {
 						logger.info('valid name convention for', {
 							value: file.path,
