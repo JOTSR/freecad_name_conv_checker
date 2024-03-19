@@ -1,0 +1,78 @@
+Document: examples/verbosity.invalid.FCStd (25.966796875K)
+   SHA1: 880a57d913cbec4a9933b1baf72afb2771626274
+   Comment : 
+   Company : 
+   CreatedBy : 
+   CreationDate : 2024-03-14T10:12:06Z
+   FileVersion : 1
+   Id : 
+   Label : verbosity.invalid
+   LastModifiedBy : 
+   LastModifiedDate : 2024-03-14T16:26:11Z
+   License : All rights reserved
+   LicenseURL : http://en.wikipedia.org/wiki/All_rights_reserved
+   ProgramVersion : 0.21R33771 (Git)
+   ShowHidden : false
+   TipName : 
+   Uid : 06259501-cfb9-403b-8be4-23df7cc408c3
+   Objects: (6)
+        Extrude : Part::Extrusion (43.0009765625K da76b25c916b)
+           Base : Sketch
+           Dir : (0.0,0.0,1.0)
+           DirMode : 2
+           FaceMakerClass : Part::FaceMakerBullseye
+           Label : Extrude001
+           LengthFwd : 3.0
+           LengthRev : 0.0
+           Placement : (0.0,0.0,0.0) (0.0,0.0,0.0,1.0)
+           Reversed : false
+           Solid : true
+           Symmetric : false
+           TaperAngle : 0.0
+           TaperAngleRev : 0.0
+           Visibility : true
+        Extrude001 : Part::Extrusion (8.326171875K 0ca4a553508b)
+           Base : Sketch002
+           Dir : (0.0,0.0,1.0)
+           DirMode : 2
+           FaceMakerClass : Part::FaceMakerBullseye
+           Label : bottom_panel_extrude
+           LengthFwd : 3.0
+           LengthRev : 0.0
+           Placement : (0.0,-100.0,0.0) (0.0,0.0,0.0,1.0)
+           Reversed : false
+           Solid : true
+           Symmetric : false
+           TaperAngle : 0.0
+           TaperAngleRev : 0.0
+           Visibility : true
+        Extrude002 : Part::Extrusion (22.9150390625K a63c2e602bb2)
+           Base : Sketch001
+           Dir : (0.0,0.0,1.0)
+           DirMode : 2
+           FaceMakerClass : Part::FaceMakerBullseye
+           Label : front_back_panel_extrude
+           LengthFwd : 3.0
+           LengthRev : 0.0
+           Placement : (0.0,150.0,0.0) (0.0,0.0,0.0,1.0)
+           Reversed : false
+           Solid : true
+           Symmetric : false
+           TaperAngle : 0.0
+           TaperAngleRev : 0.0
+           Visibility : true
+        Sketch : Sketcher::SketchObject (15.4384765625K b7719278b651)
+           FullyConstrained : true
+           Label : side_panel_sketch
+           Placement : (0.0,0.0,0.0) (0.0,0.0,0.0,1.0)
+           Visibility : false
+        Sketch001 : Sketcher::SketchObject (8.2041015625K 300b69665c79)
+           FullyConstrained : true
+           Label : front_back_panel_sketch
+           Placement : (0.0,0.0,0.0) (0.0,0.0,0.0,1.0)
+           Visibility : false
+        Sketch002 : Sketcher::SketchObject (2.953125K c28b63494d61)
+           FullyConstrained : true
+           Label : bottom_panel
+           Placement : (0.0,0.0,0.0) (0.0,0.0,0.0,1.0)
+           Visibility : false
