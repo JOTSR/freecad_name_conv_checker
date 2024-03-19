@@ -5,6 +5,7 @@
 </div>
 
 [![JSR](https://jsr.io/badges/@jotsr/fcnc?style=flat-square)](https://jsr.io/@jotsr/fcnc)
+[![JSR](https://jsr.io/badges/@jotsr/fcnc/score?style=flat-square)](https://jsr.io/@jotsr/fcnc)
 ![GitHub License](https://img.shields.io/github/license/JOTSR/fcnc?style=flat-square)
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/JOTSR/fcnc/total?style=flat-square)
 
