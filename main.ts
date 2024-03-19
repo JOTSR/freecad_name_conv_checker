@@ -1,5 +1,5 @@
 import { walk } from '@std/fs'
-import { join, toFileUrl } from '@std/path'
+import { globToRegExp, join, toFileUrl } from '@std/path'
 import { checkConstraints } from './src/checker.ts'
 import { Logger } from './src/logger.ts'
 import { Command, EnumType } from '@cliffy/command/mod.ts'
@@ -19,8 +19,8 @@ if (import.meta.main) {
 		.option('-b, --base <path:file>', 'Base path for file:path constraint.', {
 			default: Deno.cwd(),
 		})
-		.arguments('<constraints:file> <files:string[]>')
-		.action(async ({ verbose, silent, base }, constraintFile, files) => {
+		.arguments('<constraints:file> <...files:file>')
+		.action(async ({ verbose, silent, base }, constraintFile, ...files) => {
 			const { default: constraints } = await import(
 				toFileUrl(join(Deno.cwd(), constraintFile)).href
 			)
@@ -33,7 +33,7 @@ if (import.meta.main) {
 
 			for await (
 				const file of walk(base, {
-					match: [/.+\.fcinfo/],
+					match: files.map((file) => globToRegExp(file)),
 					includeDirs: false,
 				})
 			) {
