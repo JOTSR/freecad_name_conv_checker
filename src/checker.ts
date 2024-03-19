@@ -1,7 +1,6 @@
 import { relative } from '@std/path'
 import { Constraint } from '../types.ts'
-import { logCheckConstraint } from './logger.ts'
-import { Logger } from './logger.ts'
+import { logCheckConstraint, Logger } from './logger.ts'
 
 export function checkConstraint(
 	value: string,
