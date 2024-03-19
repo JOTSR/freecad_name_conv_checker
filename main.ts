@@ -12,7 +12,7 @@ if (import.meta.main) {
 		.name(config.name.split('/')[1])
 		.version(config.version)
 		.type('level', verbosity)
-		.option('-v, --verbose [value:level]', 'Enable verbose output.', {
+		.option('-v, --verbose=[value:level]', 'Enable verbose output.', {
 			conflicts: ['silent'],
 		})
 		.option('-s, --silent', 'Disable any output.', { conflicts: ['verbose'] })
