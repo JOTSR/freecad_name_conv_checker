@@ -108,5 +108,6 @@ Any kind of contribution is welcomed. Please read
 
 **Using VSCode**:
 
-- Pre-configured workspace available in [`.code-workspace`](./.code-workspace).
+- Pre-configured workspace available in
+  [`fcnc.code-workspace`](./fcnc.code-workspace).
 - Or without local tooling install use [`.devcontainer`](./.devcontainer).

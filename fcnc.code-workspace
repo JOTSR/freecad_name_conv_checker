@@ -1,0 +1,42 @@
+{
+	"folders": [{ "path": "." }],
+	"settings": {
+		"deno.enable": true,
+		"deno.lint": true,
+		"explorer.fileNesting.patterns": {
+			"*.js": "${capture}.js.map, ${capture}.*.js, ${capture}.d.ts",
+			"*.jsx": "${capture}.*",
+			"*.ts": "${capture}.*",
+			"*.tsx": "${capture}.*",
+			"deno.json*": "deno.lock",
+			"*.FCStd": "${capture}.fcinfo"
+		},
+		"editor.defaultFormatter": "denoland.vscode-deno",
+		"[typescriptreact]": {
+			"editor.defaultFormatter": "denoland.vscode-deno"
+		},
+		"[typescript]": {
+			"editor.defaultFormatter": "denoland.vscode-deno"
+		},
+		"[javascriptreact]": {
+			"editor.defaultFormatter": "denoland.vscode-deno"
+		},
+		"[javascript]": {
+			"editor.defaultFormatter": "denoland.vscode-deno"
+		},
+		"[markdown]": {
+			"editor.defaultFormatter": "denoland.vscode-deno"
+		},
+		"conventionalCommits.scopes": ["cli", "api", "chore"],
+		"cSpell.words": ["fcinfo", "fcnc"]
+	},
+	"extensions": {
+		"recommendations": [
+			"yoavbls.pretty-ts-errors",
+			"denoland.vscode-deno",
+			"bierner.github-markdown-preview",
+			"aaron-bond.better-comments",
+			"vivaxy.vscode-conventional-commits"
+		]
+	}
+}
