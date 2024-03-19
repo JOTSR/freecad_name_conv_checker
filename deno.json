@@ -1,6 +1,11 @@
 {
+	"$schema": "https://deno.land/x/denoh@v3.2.0/schema.json",
 	"name": "@jotsr/fcnc",
 	"version": "0.1.0",
+	"tasks": {
+		"hooks:install": "deno run --allow-read=. --allow-write=./.git/hooks https://deno.land/x/denoh@v3.2.0/denoh.ts",
+		"fmt:check": "git diff --name-only --staged | xargs deno fmt --check deno.json"
+	},
 	"fmt": {
 		"useTabs": true,
 		"semiColons": false,
@@ -10,5 +15,8 @@
 		"@cliffy/": "https://deno.land/x/cliffy@v1.0.0-rc.3/",
 		"@std/fs": "jsr:@std/fs@^0.220.1",
 		"@std/path": "jsr:@std/path@^0.220.1"
+	},
+	"githooks": {
+		"pre-commit": ["fmt:check"]
 	}
 }
