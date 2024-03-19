@@ -4,7 +4,15 @@
 	"version": "0.1.0",
 	"tasks": {
 		"hooks:install": "deno run --allow-read=. --allow-write=./.git/hooks https://deno.land/x/denoh@v3.2.0/denoh.ts",
-		"fmt:check": "git diff --name-only --staged | xargs deno fmt --check deno.json"
+		"fmt:check": "git diff --name-only --staged | xargs deno fmt --check deno.json",
+		"compile": "deno task compile:linux ; deno task compile:macos ; deno task compile:windows",
+		"compile:linux": "deno task compile:linux:x86 ; deno task compile:linux:arm64",
+		"compile:linux:x86": "deno compile -o=dist/fcnc-x86_64-unknown-linux-gnu --target=x86_64-unknown-linux-gnu --allow-read ./mod.ts",
+		"compile:linux:arm64": "deno compile -o=dist/fcnc-aarch64-unknown-linux-gnu --target=aarch64-unknown-linux-gnu --allow-read ./mod.ts",
+		"compile:macos": "deno task compile:macos:x86 ; deno task compile:macos:arm64",
+		"compile:macos:x86": "deno compile -o=dist/fcnc-x86_64-apple-darwin --target=x86_64-apple-darwin --allow-read ./mod.ts",
+		"compile:macos:arm64": "deno compile -o=dist/fcnc-aarch64-apple-darwin --target=aarch64-apple-darwin --allow-read ./mod.ts",
+		"compile:windows": "deno compile -o=dist/fcnc-x86_64-pc-windows-msvc.exe --target=x86_64-pc-windows-msvc --allow-read ./mod.ts"
 	},
 	"imports": {
 		"@cliffy/": "https://deno.land/x/cliffy@v1.0.0-rc.3/",
