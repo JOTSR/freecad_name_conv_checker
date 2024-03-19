@@ -1,5 +1,7 @@
+import { Command, EnumType } from '@cliffy/command/mod.ts'
 import { walk } from '@std/fs'
 import { globToRegExp, join, toFileUrl } from '@std/path'
+import config from './deno.json' with { type: 'json' }
 import { checkConstraints } from './src/checker.ts'
 import { Logger } from './src/logger.ts'
 import { Command, EnumType } from '@cliffy/command/mod.ts'
