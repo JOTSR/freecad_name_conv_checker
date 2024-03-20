@@ -74,14 +74,20 @@ export default [fileLabel]
 Without install
 
 ```sh
-deno run --allow-read jsr:@jotsr/fcnc
+deno run --allow-read=your-dir jsr:@jotsr/fcnc
 ```
 
 With install
 
 ```sh
-deno install --allow-read -rf jsr:@jotsr/fcnc
+deno install --allow-read --allow-net=api.github.com -rf jsr:@jotsr/fcnc
 ```
+
+[Deno permissions](https://docs.deno.com/runtime/manual/basics/permissions)
+explanations
+
+- `--allow-read` to read input files.
+- `--allow-net=api.github.com` to upgrade the cli.
 
 ### From binaries
 
