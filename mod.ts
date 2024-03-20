@@ -75,6 +75,20 @@ if (import.meta.main) {
 				Deno.exit(bypass ? 0 : exitCode)
 			},
 		)
+		.command(
+			'upgrade',
+			new UpgradeCommand({
+				main: 'mod.ts',
+				args: [
+					'--allow-read',
+					'--allow-net=api.github.com',
+					`--name=${config.name.split('/')[1]}`,
+				],
+				provider: new GithubProvider({
+					repository: 'JOTSR/freecad_name_conv_checker',
+				}),
+			}),
+		)
 
 	if (Deno.args.length) {
 		await cmd.parse(Deno.args)
