@@ -3,7 +3,7 @@ import config from './deno.json' with { type: 'json' }
 import { check } from './cli/check.ts'
 import { upgrade } from './cli/upgrade.ts'
 
-export { checkConstraint, checkConstraints } from './src/checker.ts'
+export { checkConstraint, checkConstraints } from './src/check.ts'
 export type { Constraint } from './types.ts'
 
 if (import.meta.main) {
