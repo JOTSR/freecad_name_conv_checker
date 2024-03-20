@@ -30,13 +30,18 @@
   fcnc --help
   ```
 
+- Get command help:
+  ```sh
+  fcnc <command> --help
+  ```
+
 - Check constraints:
   ```sh
   # Run fcinfo
   ./fcinfo my_freecad_model.FCStd > any_file.fcinfo
 
   # Check name convention
-  fcnc my_constraints.ts any_file.fcinfo or*globs?.fcinfo
+  fcnc check my_constraints.ts any_file.fcinfo or*globs?.fcinfo
   ```
 
 ### API
