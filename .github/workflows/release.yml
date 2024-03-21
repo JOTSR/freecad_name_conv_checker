@@ -1,0 +1,32 @@
+name: Release
+on:
+    push:
+        tags:
+            - '^[0-9]+\.[0-9]+\.[0-9]+(-.+)?$'
+        branches:
+            - main
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+
+        permissions:
+            contents: read
+            id-token: write
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Deno
+              uses: denoland/setup-deno@v1
+
+            - name: Compile
+              run: deno task compile
+
+            - name: Compress
+              run: gzip -1 -S ".gz" -r ./dist
+
+            - name: Upload
+              run: gh release create v${{ github.ref_name }} --generate-notes ./dist/*
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

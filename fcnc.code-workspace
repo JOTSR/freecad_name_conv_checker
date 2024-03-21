@@ -28,7 +28,13 @@
 			"editor.defaultFormatter": "denoland.vscode-deno"
 		},
 		"conventionalCommits.scopes": ["cli", "api", "chore"],
-		"cSpell.words": ["fcinfo", "fcnc"]
+		"cSpell.words": ["fcinfo", "fcnc"],
+		"[github-actions-workflow]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[ignore]": {
+			"editor.defaultFormatter": "foxundermoon.shell-format"
+		}
 	},
 	"extensions": {
 		"recommendations": [

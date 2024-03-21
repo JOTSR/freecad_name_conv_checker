@@ -98,15 +98,15 @@ explanations
 
 ```sh
 # Linux
-curl -fsSLo fcnc https://raw.githubusercontent.com/JOTSR/freecad_name_conv_checker/main/dist/fcnc-x86_64-unknown-linux-gnu
-curl -fsSLo fcnc https://raw.githubusercontent.com/JOTSR/freecad_name_conv_checker/main/dist/fcnc-aarch64-unknown-linux-gnu
+curl -fsSLo fcnc https://github.com/JOTSR/release/download/$VERSION/fcnc-x86_64-unknown-linux-gnu.gz
+curl -fsSLo fcnc https://github.com/JOTSR/release/download/$VERSION/fcnc-aarch64-unknown-linux-gnu.gz
 
 # macOS
-curl -fsSLo fcnc https://raw.githubusercontent.com/JOTSR/freecad_name_conv_checker/main/dist/fcnc-x86_64-apple-darwin
-curl -fsSLo fcnc https://raw.githubusercontent.com/JOTSR/freecad_name_conv_checker/main/dist/fcnc-aarch64-apple-darwin
+curl -fsSLo fcnc https://github.com/JOTSR/release/download/$VERSION/fcnc-x86_64-apple-darwin.gz
+curl -fsSLo fcnc https://github.com/JOTSR/release/download/$VERSION/fcnc-aarch64-apple-darwin.gz
 
 # Windows
-curl -fsSLo fcnc.exe https://raw.githubusercontent.com/JOTSR/freecad_name_conv_checker/main/dist/fcnc-x86_64-pc-windows-msvc.exe
+curl -fsSLo fcnc.exe https://github.com/JOTSR/release/download/$VERSION/fcnc-x86_64-pc-windows-msvc.exe.gz
 ```
 
 ## Doc

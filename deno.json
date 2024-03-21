@@ -1,7 +1,7 @@
 {
 	"$schema": "https://deno.land/x/denoh@v3.2.0/schema.json",
 	"name": "@jotsr/fcnc",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"tasks": {
 		"hooks:install": "deno run --allow-read=. --allow-write=./.git/hooks https://deno.land/x/denoh@v3.2.0/denoh.ts",
 		"fmt:check": "git diff --name-only --staged | xargs deno fmt --ignore=vendor --check deno.json",
