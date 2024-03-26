@@ -5,6 +5,8 @@
 	"tasks": {
 		"hooks:install": "deno run --allow-read=. --allow-write=./.git/hooks https://deno.land/x/denoh@v3.2.0/denoh.ts",
 		"fmt:check": "git diff --name-only --staged | xargs deno fmt --ignore=vendor --check deno.json",
+		"changelog:generate": "deno run --allow-read --allow-env --allow-run npm:git-cliff > CHANGELOG.md && deno fmt CHANGELOG.md",
+		"changelog:add": "deno task changelog:generate && git add CHANGELOG.md",
 		"compile": "deno task compile:linux ; deno task compile:macos ; deno task compile:windows",
 		"compile:linux": "deno task compile:linux:x86 ; deno task compile:linux:arm64",
 		"compile:linux:x86": "deno compile -o=dist/fcnc-x86_64-unknown-linux-gnu --target=x86_64-unknown-linux-gnu --allow-read ./mod.ts",
@@ -22,7 +24,10 @@
 	},
 	"exports": "./mod.ts",
 	"githooks": {
-		"pre-commit": ["fmt:check"]
+		"pre-commit": [
+			"fmt:check",
+			"changelog:add"
+		]
 	},
 	"fmt": {
 		"useTabs": true,
@@ -30,6 +35,8 @@
 		"singleQuote": true
 	},
 	"publish": {
-		"exclude": ["./dist"]
+		"exclude": [
+			"./dist"
+		]
 	}
 }
